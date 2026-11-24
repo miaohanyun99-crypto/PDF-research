@@ -18,7 +18,7 @@ if not st.session_state.get("authorized"):
     password = st.text_input("请输入访问密码", type="password")
     if st.button("登录"):
         if hmac.compare_digest(
-            password, st.secrets["APP_PASSWORD"]
+            str(password).encode("utf-8"), str(st.secrets["APP_PASSWORD"]).encode("utf-8")
         ):
             st.session_state["authorized"] = True
             st.rerun()
